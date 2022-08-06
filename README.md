@@ -51,8 +51,7 @@ in the terminal. It's a single file, you can get it by just downloading the one
 file if you want to.
 
 ```pycon
->>> from cursed_for import _for, var
->>> with _for(i := var(0), i < 10, i += 2):
+>>> with _for(i := 0, i < 10, i += 2):
 ...     print(i)
 0
 2

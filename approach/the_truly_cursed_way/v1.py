@@ -11,7 +11,7 @@ cursed_for_regex = re.compile(r'^\s*for\s*\((.+?);(.+?);(.+?)\):(.*)$')
 
 def transform_cursed_for(source: str) -> str:
     new_source = []
-    lines = source.splitlines(keepends=True)
+    lines = source.splitlines()
 
     index = 0
     while index < len(lines):
@@ -52,16 +52,16 @@ def transform_cursed_for(source: str) -> str:
             for_body_lines.append(next_line)
             index += 1
         
-        initializer_stmt = f'{for_indent_level}{initializer.strip()}\n' 
-        while_stmt = f'{for_indent_level}while {condition.strip()}:\n'
-        increment_stmt = f'{body_indent_level}{increment.strip()}\n'
+        initializer_stmt = f'{for_indent_level}{initializer.strip()}' 
+        while_stmt = f'{for_indent_level}while {condition.strip()}:'
+        increment_stmt = f'{body_indent_level}{increment.strip()}'
 
-        new_source.extend(initializer_stmt)
-        new_source.extend(while_stmt)
+        new_source.append(initializer_stmt)
+        new_source.append(while_stmt)
         new_source.extend(for_body_lines)
-        new_source.extend(increment_stmt)
+        new_source.append(increment_stmt)
 
-    return ''.join(new_source)
+    return '\n'.join(new_source) + '\n'
 
 
 

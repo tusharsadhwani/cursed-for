@@ -57,27 +57,27 @@ def _transform_cursed_for(lines: list[str]) -> list[str]:
 
         new_block_lines = _transform_cursed_for(block_lines)
 
-        initializer_stmt = f"{indent_spaces}{initializer.strip()}\n"
-        increment_stmt = f"{body_indent_level}{increment.strip()}\n"
+        initializer_stmt = f"{indent_spaces}{initializer.strip()}"
+        increment_stmt = f"{body_indent_level}{increment.strip()}"
 
         condition = condition.strip()
         if condition == "":
-            while_stmt = f"{indent_spaces}while True:\n"
+            while_stmt = f"{indent_spaces}while True:"
         else:
-            while_stmt = f"{indent_spaces}while {condition}:\n"
+            while_stmt = f"{indent_spaces}while {condition}:"
 
-        new_source.extend(initializer_stmt)
-        new_source.extend(while_stmt)
+        new_source.append(initializer_stmt)
+        new_source.append(while_stmt)
         new_source.extend(new_block_lines)
-        new_source.extend(increment_stmt)
+        new_source.append(increment_stmt)
 
     return new_source
 
 
 def transform_cursed_for(source: str) -> str:
-    lines = source.splitlines(keepends=True)
+    lines = source.splitlines()
     new_lines = _transform_cursed_for(lines)
-    return "".join(new_lines)
+    return "\n".join(new_lines) + "\n"
 
 
 def cursed_for_decode(

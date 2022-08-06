@@ -61,7 +61,7 @@ def transform_cursed_for(source: str) -> str:
         new_source.extend(for_body_lines)
         new_source.append(increment_stmt)
 
-    return '\n'.join(new_source) + '\n'
+    return '\n'.join(new_source)
 
 
 

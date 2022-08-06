@@ -65,7 +65,7 @@ def _transform_cursed_for(lines: list[str]) -> list[str]:
 def transform_cursed_for(source: str) -> str:
     lines = source.splitlines()
     new_lines = _transform_cursed_for(lines)
-    return '\n'.join(new_lines) + '\n'
+    return '\n'.join(new_lines)
 
 
 def cursed_for_decode(source_bytes: bytes | memoryview) -> tuple[str, int]:

@@ -16,11 +16,12 @@ Here's how you use it:
     8
     >>>
 """
+from __future__ import annotations
+
 import ast
 import code
 from contextlib import suppress
 import sys
-from typing import List
 
 
 class ForTransformer(ast.NodeTransformer):
@@ -55,7 +56,7 @@ class ForTransformer(ast.NodeTransformer):
 
         return node
 
-    def replace_cursed_for(self, node: ast.With) -> List[ast.AST]:
+    def replace_cursed_for(self, node: ast.With) -> list[ast.AST]:
         if len(node.items) > 1:
             raise SyntaxError("Cursed-for doesn't support multi-with statements.")
 

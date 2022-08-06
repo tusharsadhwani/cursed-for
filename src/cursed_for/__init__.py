@@ -7,6 +7,9 @@ import io
 import re
 import sys
 
+from cursed_for.console import CursedConsole
+from cursed_for.errors import CursedEOFError
+
 utf_8 = encodings.search_function("utf8")
 
 beginning_with_for_regex = re.compile(r"^\s*for\b")
@@ -39,7 +42,7 @@ def _transform_cursed_for(lines: list[str]) -> list[str]:
         indent_spaces = indent_regex.match(line).group()
 
         if index >= len(lines):
-            raise SyntaxError("Unexpected for-statement at end of file")
+            raise CursedEOFError("Unexpected for-statement at end of file")
 
         next_line = lines[index]
         index += 1
@@ -142,7 +145,7 @@ def register():
     codecs.register(cursed_for_loop_decoder)
 
 
-def cli():
+def decode_cli():
     if len(sys.argv) >= 3:
         print("Syntax: cursed-for-decode [filename.py]")
         sys.exit(1)
@@ -155,3 +158,12 @@ def cli():
         code = sys.stdin.buffer.read()
 
     print(code.decode("cursed_for"))
+
+
+def cli():
+    if sys.platform != "win32":
+        import readline
+
+        readline.parse_and_bind("tab: complete")
+
+    CursedConsole().interact(banner=f"Cursed Python REPL, {sys.version}", exitmsg="")

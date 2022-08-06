@@ -24,7 +24,7 @@ from contextlib import suppress
 import sys
 
 
-class ForTransformer(ast.NodeTransformer):
+class CursedForTransformer(ast.NodeTransformer):
     @staticmethod
     def is_cursed_for_call(node: ast.AST) -> bool:
         return (
@@ -113,8 +113,8 @@ class CursedConsole(code.InteractiveConsole):
 
         try:
             tree = ast.parse(source, filename, mode=symbol)
-            cursed_tree = ForTransformer().visit(tree)
-            ast.fix_missing_locations(cursed_tree)
+            CursedForTransformer().visit(tree)
+            ast.fix_missing_locations(tree)
         except (ValueError, SyntaxError):
             # Let the original implementation take care of incomplete input / errors
             return super().runsource(source, filename, symbol)

@@ -80,8 +80,11 @@ def transform_cursed_for(source: str) -> str:
     return "".join(new_lines)
 
 
-def cursed_for_decode(source_bytes: bytes, errors: str = "strict") -> tuple[str, int]:
-    source = source_bytes.decode("utf-8", errors=errors)
+def cursed_for_decode(
+    source_bytes: bytes | memoryview,
+    errors: str = "strict",
+) -> tuple[str, int]:
+    source = bytes(source_bytes).decode("utf-8", errors=errors)
     modified_source = transform_cursed_for(source)
     return modified_source, len(source_bytes)
 

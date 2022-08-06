@@ -5,5 +5,10 @@ def main():
         for (j = i; j < 10; j += 3):
             print(i, j)
     
+    counter = 0
     for (;;):
+        if counter > 5:
+            break
+
         print('wat')
+        counter += 1

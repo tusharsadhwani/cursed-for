@@ -22,7 +22,7 @@ curse:
 # coding: cursed_for
 ```
 
-Then write the cursed for-loops as needed.
+Then write the cursed for-loops as needed. Check [this file][ex] for an example.
 
 ## But why?
 
@@ -64,3 +64,4 @@ file if you want to.
 [1]: ./approach/ast_manipulation/cursedfor.py
 [2]: https://pypi.org/p/cstyle
 [3]: https://github.com/asottile/future-fstrings
+[ex]: approach/the_truly_cursed_way/test_v3.py
